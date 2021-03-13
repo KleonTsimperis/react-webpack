@@ -10,3 +10,22 @@ https://maxrozen.com/difference-between-style-loader-mini-css-extract-plugin
 Both Babel and PostCss is reading from this list.
 NOTE: Using `.browserslistrc` file, causes a bug, that disables the hot reloading. Look the implementation with `let target = "web"` for a workaround
 ===
+
+
+===
+Up until webpack 4 we would use url loader and file loader. But in webpack 5 we can do a built in way
+===
+
+===
+`{`
+    `test: /\.(png|jpe?g|gif|svg)$/i,`
+    `type: "asset/inline"` // asset/resource
+`},`
+* asset/resource will create a directory: dist/images
+  the images directory is created due to:
+  `output: {`
+        `assetModuleFilename: "images/[hash][ext][query]"`
+    `},`
+* asset/inline will inline the images in the bundled js file (main.js)
+* asset webpack will decide based on the images. E.g. if 2 images are large, and 2 small (8kb default), it will create the image directory for the large files and the other two will be inlined
+===

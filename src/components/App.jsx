@@ -1,5 +1,7 @@
 import "../styles/index.scss";
-import React from 'react';
+import Recipes from './Recipes';
+import sword from 'src/images/swc-sword.png';
+import swordSvg from 'src/images/sword.svg';
 
 const App = () => (
     <>
@@ -8,9 +10,12 @@ const App = () => (
             <section>
                 <h1>Oh Hai, React</h1>
             </section>
+            <img src={sword} alt="sword" width="250" />
+            <img src={swordSvg} alt="sword" width="250" />
+            <Recipes />
         </main>
     </>
 )
 
 
-export default App; 
+export default App;
