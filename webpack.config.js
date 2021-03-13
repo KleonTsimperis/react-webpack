@@ -1,7 +1,8 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path');
 const { webpack, DefinePlugin } = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 let mode = "development";
 let target = "web";
@@ -16,6 +17,7 @@ module.exports = {
     target,
 
     output: {
+        path: path.resolve(__dirname, "dist"), // Needed for clean webpack plugin to work
         assetModuleFilename: "images/[hash][ext][query]"
     },
 
@@ -49,10 +51,9 @@ module.exports = {
     },
 
     plugins: [
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin(),
-        new HtmlWebpackPlugin({
-            template: "index-template.html",
-        }),
+        new HtmlWebpackPlugin({ template: "./src/index.html" }),
         new DefinePlugin({
             PRODUCTION: process.env.NODE_ENV === "production",
             VERSION: JSON.stringify('5fa3b9'),
